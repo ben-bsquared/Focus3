@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Quick Preview</title>
+
+    <!-- 1. Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Babel Standalone for in-browser JSX compilation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- 3. Import Map: This allows copy-pasting code with standard 'import' statements -->
+    <script type="importmap">
+        {
+            "imports": {
+                "react": "https://esm.sh/react@18.2.0",
+                "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+                "lucide-react": "https://esm.sh/lucide-react@0.344.0"
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-100 min-h-screen">
+<div id="root"></div>
+
+<!-- 4. Your React Code Goes Here (Note: type="text/babel" and data-type="module") -->
+<script type="text/babel" data-type="module">
+    import React from 'react';
+    import { createRoot } from 'react-dom/client';
+
+    // ==========================================
+    // ⬇️ PASTE THE APP COMPONENT IMPORTS HERE ⬇️
+    // ==========================================
+    import { Users, Vote, Star, Video, Target, TrendingUp, Award, CheckCircle2 } from 'lucide-react';
+
+    // ==========================================
+    // ⬇️ PASTE THE APP COMPONENT CODE HERE ⬇️
+    // ==========================================
+    function App() {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="bg-white p-8 rounded-xl shadow-lg text-center">
+                    <Target className="w-12 h-12 mx-auto text-indigo-600 mb-4" />
+                    <h1 className="text-2xl font-bold text-slate-800">Ready for Code</h1>
+                    <p className="text-slate-500 mt-2">Paste your generated App component above this!</p>
+                </div>
+            </div>
+        );
+    }
+
+    // ==========================================
+    // ⬆️ END OF APP COMPONENT CODE ⬆️
+    // ==========================================
+
+    const root = createRoot(document.getElementById('root'));
+    root.render(<App />);
+</script>
+</body>
+</html>
