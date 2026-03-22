@@ -32,12 +32,30 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { CheckCircle2, Plus, Zap, ListChecks, Trophy, XCircle, Volume2, VolumeX } from 'lucide-react';
 
+const STORAGE_KEY = 'focus3_state';
+
+const loadState = () => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) return JSON.parse(saved);
+  } catch (e) {}
+  return null;
+};
+
+const initialState = loadState();
+
 const App = () => {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(initialState?.tasks ?? []);
   const [inputValue, setInputValue] = useState('');
-  const [completedCount, setCompletedCount] = useState(0);
+  const [completedCount, setCompletedCount] = useState(initialState?.completedCount ?? 0);
   const [showConfetti, setShowConfetti] = useState(false);
-  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [soundEnabled, setSoundEnabled] = useState(initialState?.soundEnabled ?? true);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ tasks, completedCount, soundEnabled }));
+    } catch (e) {}
+  }, [tasks, completedCount, soundEnabled]);
 
   const MAX_TASKS = 3;
 
